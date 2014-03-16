@@ -33,9 +33,19 @@ import javafx.stage.Stage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+import java.util.Locale;
+import java.util.ResourceBundle;
+
+/**
+ * Created by Matt Neundorf [Naxmeify] on 16.03.14.
+ */
+
 public class YTDownloaderMain extends Application {
 
     private static final Logger log = LoggerFactory.getLogger(YTDownloaderMain.class);
+    private ResourceBundle mainViewResources;
 
     public static void main(String[] args) throws Exception {
         launch(args);
@@ -43,18 +53,20 @@ public class YTDownloaderMain extends Application {
 
     public void start(Stage stage) throws Exception {
 
-        log.info("Starting Hello JavaFX and Maven demonstration application");
+        log.info("Starting JavaFX and Maven application");
 
-        String fxmlFile = "/fxml/hello.fxml";
+        String fxmlFile = "/fxml/MainView/MainView.fxml";
+        mainViewResources = ResourceBundle.getBundle("fxml.MainView.MainView");
+        Locale locale = new Locale("de");
         log.debug("Loading FXML for main view from: {}", fxmlFile);
         FXMLLoader loader = new FXMLLoader();
-        Parent rootNode = (Parent) loader.load(getClass().getResourceAsStream(fxmlFile));
+        Parent rootNode = (Parent) loader.load(getClass().getResource(fxmlFile), mainViewResources);
 
         log.debug("Showing JFX scene");
-        Scene scene = new Scene(rootNode, 400, 200);
-        scene.getStylesheets().add("/styles/styles.css");
+        Scene scene = new Scene(rootNode, 1000, 800);
+        //scene.getStylesheets().add("/styles/styles.css");
 
-        stage.setTitle("Hello JavaFX and Maven");
+        stage.setTitle("YTDownloader");
         stage.setScene(scene);
         stage.show();
     }
