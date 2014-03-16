@@ -10,7 +10,7 @@
 <?import javafx.scene.text.*?>
 <?scenebuilder-preview-i18n-resource MainView_en.properties?>
 
-<VBox prefHeight="600.0" prefWidth="900.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2">
+<VBox prefHeight="600.0" prefWidth="900.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="me.nax.ytdownloader.controller.MainViewController">
   <children>
     <MenuBar VBox.vgrow="NEVER">
       <menus>

@@ -29,13 +29,11 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 /**
@@ -45,22 +43,28 @@ import java.util.ResourceBundle;
 public class YTDownloaderMain extends Application {
 
     private static final Logger log = LoggerFactory.getLogger(YTDownloaderMain.class);
-    private ResourceBundle mainViewResources;
+
+    private static final String kMainViewFXML = "/fxml/MainView/MainView.fxml";
+    private static final String kMainViewResources = "fxml.MainView.MainView";
+
+    private static final String kAlertDialogFXML = "/fxml/AlertDialog/AlertDialog.fxml";
+    private static final String kAlertDialogResources = "fxml.AlertDialog.AlertDialog";
+
+    private static Stage stage;
 
     public static void main(String[] args) throws Exception {
         launch(args);
     }
 
-    public void start(Stage stage) throws Exception {
+    public void start(Stage primStage) throws Exception {
+        stage = primStage;
 
         log.info("Starting JavaFX and Maven application");
 
-        String fxmlFile = "/fxml/MainView/MainView.fxml";
-        mainViewResources = ResourceBundle.getBundle("fxml.MainView.MainView");
-        Locale locale = new Locale("de");
-        log.debug("Loading FXML for main view from: {}", fxmlFile);
+        log.debug("Loading MainView FXML from: {}", kMainViewFXML);
+        log.debug("Loading MainView Resourcens from: {}", kMainViewResources);
         FXMLLoader loader = new FXMLLoader();
-        Parent rootNode = (Parent) loader.load(getClass().getResource(fxmlFile), mainViewResources);
+        Parent rootNode = (Parent) loader.load(getClass().getResource(kMainViewFXML), ResourceBundle.getBundle(kMainViewResources));
 
         log.debug("Showing JFX scene");
         Scene scene = new Scene(rootNode, 1000, 800);
@@ -69,5 +73,29 @@ public class YTDownloaderMain extends Application {
         stage.setTitle("YTDownloader");
         stage.setScene(scene);
         stage.show();
+    }
+
+    public static void showAlert(String title, String message) {
+        
+    }
+
+    public static String getkMainViewFXML() {
+        return kMainViewFXML;
+    }
+
+    public static String getkMainViewResources() {
+        return kMainViewResources;
+    }
+
+    public static String getkAlertDialogFXML() {
+        return kAlertDialogFXML;
+    }
+
+    public static String getkAlertDialogResources() {
+        return kAlertDialogResources;
+    }
+
+    public static Stage getStage() {
+        return stage;
     }
 }
